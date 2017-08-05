@@ -9,10 +9,10 @@
 Angielskie napisy , ponieważ skrypt jest publikowany na wielu forach angielskich.
 ```
 ---
-# [PL] 
-# eProfile
+### [PL] 
+### eProfile
 ---
-## Teraz w wersji 1.0
+#### Teraz w wersji 1.0
 ---
-#### Następna wersja: 1.1
+##### Następna wersja: 1.1
 ---
