@@ -1,0 +1,94 @@
+variables:
+	{eProfile::kills::%player%} = 0
+	{eProfile::deaths::%player%} = 0
+	{eProfile::minedblocks::%player%} = 0
+	{eProfile::placedblocks::%player%} = 0
+	{eProfile::eated::apple::%player%} = 0
+	{eProfile::eated::goldenapple::%player%} = 0
+	{eProfile::eated::enchantedgoldenapple::%player%} = 0
+
+command /esej:myprofile [<text>]:
+	description: Informacje o Tobie!
+	aliases: /myprofile, /profil, /profile
+	trigger:
+		if argument isn't "2" or "3" or "4" or "5":
+			send json "&8» &3Aby sprawdzic swoj profil&7..." tooltip "&8» &7Kliknij" run "/profil" to player
+		if argument isn't set:
+			send "&8[&3MySQL&8] &7Trwa laczenie z baza danych..."
+			wait a second
+			send "&8[&3MySQL&8] &7Sprawdzanie danych logowania..."
+			wait 2 seconds
+			wait 5 ticks
+			open chest with 3 rows named "&8| • &6To ty! &8• |" to the player
+			send "&8[&ee&3Connect&8] &aPomyslnie polaczano z baza danych"
+			loop 9 times:
+				format slot loop-number -1 of player with 1 of pink stained glass pane named "&d$" to be unstealable
+			loop 4 times:
+				format slot (9 + loop-number - 1) of player with 1 of black stained glass pane named "&0$" to be unstealable
+			format slot 13 of player with 1 of player's skull named "        &7» &3%player% &7«" with lore "&8&k║&6 Informacje o Tobie! &8&k║" to close then run [make player execute command "myprofile 2"]
+			loop 4 times:
+				format slot (14 + loop-number - 1) of player with 1 of black stained glass pane named "&0$" to be unstealable
+			loop 9 times:
+				format slot (18 + loop-number - 1) of player with 1 of purple stained glass pane named "&5$" to be unstealable
+		if argument is "2":
+			wait 5 ticks
+			open chest with 4 rows named "&8| &c&l○ &e%player% &c&l○ &8|" to the player
+			loop 11 times:
+				format slot (loop-number - 1) of player with 1 of black stained glass pane named " " to be unstealable
+			format slot 11 of player with 1 of paper named "&8» &7PREMIUM &8«" with lore "&8» &6Sprawdz swoj status premium!||&8» &aZIELONY &8(&3PREMIUM&8) &7/ &cCZERWONY &8(&6STIV&8)" to be unstealable
+			format slot 12 of player with 1 of paper named "&8» &7BIJATYKA &8«" with lore "&8» &6Sprawdz swoje statystyki w bijatyce!||&8» &3&lKLIKNIJ &8«" to close then run [make player execute command "myprofile 3"]
+			format slot 13 of player with 1 of paper named "&8» &7BLOKI &8«" with lore "&8» &6Sprawdz wykopane oraz zniszczone bloki." to close then run [make player execute command "myprofile 4"]
+			format slot 14 of player with 1 of paper named "&8» &7JABLUSZKA &8«" with lore "&8» &6Sprawdz ile zjadles juz jablek" to close then run [make player execute command "myprofile 5"]
+			format slot 15 of player with 1 of dragon egg named "&8» &cWroc &8«" with lore "&8» &6Powrot do menu &4glownego&8«" to close then run [make player execute command "myprofile"]
+			format slot 20 of player with 1 of red stained clay named "&8» &4Mojang &cnot working&4!" with lore "&8» &4Error: &cClick to read more!" to close then run [kick player due to "&8» &4API &cprzestalo dzialac prawdopodobnie%nl%&8» &cGdy &4Microsoft &cwykupil &4Minecrafta"]
+			format slot 21 of player with 1 of pink stained clay named "&dTU NIC NIE MA &4♥" to be unstealable
+			format slot 22 of player with 1 of pink stained clay named "&dTU NIC NIE MA &4♥" to be unstealable
+			format slot 23 of player with 1 of pink stained clay named "&dTU NIC NIE MA &4♥" to be unstealable
+			format slot 24 of player with 1 of pink stained clay named "&dTU NIC NIE MA &4♥" to be unstealable
+			loop 2 times:
+				format slot (16 + loop-number - 1) of player with 1 of black stained glass pane named " " to be unstealable
+			loop 2 times:
+				format slot (18 + loop-number - 1) of player with 1 of black stained glass pane named " " to be unstealable
+			loop 2 times:
+				format slot (25 + loop-number - 1) of player with 1 of black stained glass pane named " " to be unstealable
+			loop 9 times:
+				format slot (27 + loop-number - 1) of player with 1 of black stained glass pane named " " to be unstealable
+		if argument is "3":
+			wait 5 ticks
+			open chest with 1 rows named "&8| &c&l○ &e%player% &c&l○ &8|" to the player
+			format slot 3 of player with 1 of paper named "&8» &7ZABOJSTWA &8«" with lore "&8» &c%{eProfile::kills::%player%}%" to be unstealable
+			format slot 5 of player with 1 of paper named "&8» &7SMIERCI &8«" with lore "&8» &c%{eProfile::deaths::%player%}%" to be unstealable
+			format slot 8 of player with 1 of dragon egg named "&8» &cWroc &8«" with lore "&8» &6Powrot do menu &8«" to close then run [make player execute command "myprofile 2"]
+		if argument is "4":
+			wait 5 ticks
+			open chest with 1 rows named "&8| &c&l○ &e%player% &c&l○ &8|" to the player
+			format slot 3 of player with 1 of stone named "&8» &7WYKOPANE &8«" with lore "&8» &3%{eProfile::minedblocks::%player%}%" to be unstealable
+			format slot 5 of player with 1 of bedrock named "&8» &7POSTAWIONE &8«" with lore "&8» &3%{eProfile::placedblocks::%player%}%" to be unstealable
+			format slot 8 of player with 1 of dragon egg named "&8» &cWroc &8«" with lore "&8» &6Powrot do menu &8«" to close then run [make player execute command "myprofile 2"]
+		if argument is "5":
+			wait 5 ticks
+			open chest with 1 rows named "&8| &c&l○ &e%player% &c&l○ &8|" to the player
+			format slot 2 of player with 1 of apple named "&8» &7ZWYKLE &4JABLKA" with lore "&8» &7%{eProfile::eated::apple::%player%}%||&0(Tylko pajac nie bedzie mial tu &80&0)" to be unstealable
+			format slot 4 of player with 1 of golden apple item named "&8» &7ZWYKLE &eZLOTE &4JABLKA" with lore "&8» &7%{eProfile::eated::goldenapple::%player%}%" to be unstealable
+			format slot 6 of player with 1 of enchanted golden apple named "&8» &6ZAKLETE &eZLOTE &4JABLKA" with lore "&8» &7%{eProfile::eated::enchantedgoldenapple::%player%}%" to be unstealable
+			format slot 8 of player with 1 of dragon egg named "&8» &cWroc &8«" with lore "&8» &6Powrot do menu &8«" to close then run [make player execute command "myprofile 2"]
+
+on place:
+	add 1 to {eProfile::placedblocks::%player%}
+on break:
+	add 1 to {eProfile::minedblocks::%player%}
+
+on eat:
+	if event-item is enchanted golden apple:
+		add 1 to {eProfile::eated::enchantedgoldenapple::%player%}
+	if event-item is golden apple item:
+		add 1 to {eProfile::eated::goldenapple::%player%}
+	if event-item is apple:
+		add 1 to {eProfile::eated::apple::%player%}
+
+
+on damage:
+	if attacker is a player:
+		if victim is a player:
+			add 1 to {eProfile::kills::%attacker%}
+			add 1 to {eProfile::deaths::%victim%}
