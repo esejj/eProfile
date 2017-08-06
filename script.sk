@@ -4,9 +4,9 @@ variables:
 	{eProfile::deaths::%player%} = 0
 	{eProfile::minedblocks::%player%} = 0
 	{eProfile::placedblocks::%player%} = 0
-	{eProfile::eated::apple::%player%} = 0
-	{eProfile::eated::goldenapple::%player%} = 0
-	{eProfile::eated::enchantedgoldenapple::%player%} = 0
+	{eProfile::eaten::apple::%player%} = 0
+	{eProfile::eaten::goldenapple::%player%} = 0
+	{eProfile::eaten::enchantedgoldenapple::%player%} = 0
 on skript load:
 	if file "plugins/Skript/scripts/license-for-eProfile.txt" doesn't exists:
 		download from "https://raw.githubusercontent.com/esejj/eProfile/master/LICENSE.TXT" to "plugins/Skript/scripts/license-for-eProfile.txt"
@@ -71,9 +71,9 @@ command /esej:myprofile [<text>]:
 		if argument is "5":
 			wait 5 ticks
 			open chest with 1 rows named "&8| &c&l○ &e%player% &c&l○ &8|" to the player
-			format slot 2 of player with 1 of apple named "&8» &7ZWYKLE &4JABLKA" with lore "&8» &7%{eProfile::eated::apple::%player%}%||&0(Tylko pajac nie bedzie mial tu &80&0)" to be unstealable
-			format slot 4 of player with 1 of golden apple item named "&8» &7ZWYKLE &eZLOTE &4JABLKA" with lore "&8» &7%{eProfile::eated::goldenapple::%player%}%" to be unstealable
-			format slot 6 of player with 1 of enchanted golden apple named "&8» &6ZAKLETE &eZLOTE &4JABLKA" with lore "&8» &7%{eProfile::eated::enchantedgoldenapple::%player%}%" to be unstealable
+			format slot 2 of player with 1 of apple named "&8» &7ZWYKLE &4JABLKA" with lore "&8» &7%{eProfile::eaten::apple::%player%}%||&0(Tylko pajac nie bedzie mial tu &80&0)" to be unstealable
+			format slot 4 of player with 1 of golden apple item named "&8» &7ZWYKLE &eZLOTE &4JABLKA" with lore "&8» &7%{eProfile::eaten::goldenapple::%player%}%" to be unstealable
+			format slot 6 of player with 1 of enchanted golden apple named "&8» &6ZAKLETE &eZLOTE &4JABLKA" with lore "&8» &7%{eProfile::eaten::enchantedgoldenapple::%player%}%" to be unstealable
 			format slot 8 of player with 1 of dragon egg named "&8» &cWroc &8«" with lore "&8» &6Powrot do menu &8«" to close then run [make player execute command "myprofile 2"]
 
 on place:
@@ -83,11 +83,11 @@ on break:
 
 on eat:
 	if event-item is enchanted golden apple:
-		add 1 to {eProfile::eated::enchantedgoldenapple::%player%}
+		add 1 to {eProfile::eaten::enchantedgoldenapple::%player%}
 	if event-item is golden apple item:
-		add 1 to {eProfile::eated::goldenapple::%player%}
+		add 1 to {eProfile::eaten::goldenapple::%player%}
 	if event-item is apple:
-		add 1 to {eProfile::eated::apple::%player%}
+		add 1 to {eProfile::eaten::apple::%player%}
 
 
 on damage:
